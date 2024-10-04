@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload and Process Image</title>
+    <style>
+        .image-card {
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .image-card.selected {
+            border-color: blue;
+        }
+
+        .image-card img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .hidden-radio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload and Process Image</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.user.label }}: {{ form.user }} <br>
+        {{ form.original_image.label }}: {{ form.original_image }} <br>
+
+        <h3>Select Background Image:</h3>
+        <div>
+            {% for choice in form.background_choice.field.choices %}
+                <label class="image-card">
+                    <input type="radio" name="background_choice" value="{{ choice.0 }}" class="hidden-radio">
+                    <img src="{{ MEDIA_URL }}background_image/{{ choice.0 }}" alt="Background Image">
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Upload and Process</button>
+    </form>
+
+    <script>
+        const imageCards = document.querySelectorAll('.image-card');
+        imageCards.forEach(card => {
+            card.addEventListener('click', () => {
+                imageCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                card.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+    </script>
+</body>
+</html>
