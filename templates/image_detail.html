@@ -1,13 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processed Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Processed Image</h1>
-    <p>Original Image:</p>
-    <img src="{{ image.original_image.url }}" width="480"  alt="Original Image">
-    <p>Processed Image:</p>
-    <img src="{{ image.processed_image.url }}" width="480" alt="Processed Image">
+<body class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center text-gray-800">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
+        <!-- Page Title -->
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Processed Image</h1>
+
+        <!-- Images Section -->
+        <div class="flex flex-col md:flex-row items-center md:space-x-8 space-y-6 md:space-y-0">
+            <!-- Original Image -->
+            <div class="text-center">
+                <p class="text-lg font-medium text-gray-700 mb-4">Original Image</p>
+                <img 
+                    src="{{ image.original_image.url }}" 
+                    alt="Original Image" 
+                    class="w-64 h-auto rounded-lg shadow-md"
+                >
+            </div>
+
+            <!-- Processed Image -->
+            <div class="text-center">
+                <p class="text-lg font-medium text-gray-700 mb-4">Processed Image</p>
+                <img 
+                    src="{{ image.processed_image.url }}" 
+                    alt="Processed Image" 
+                    class="w-64 h-auto rounded-lg shadow-md"
+                >
+            </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="mt-8 flex justify-center space-x-4">
+            <!-- Home Button -->
+            <a 
+                href="{% url 'landing_page' %}" 
+                class="px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold rounded-lg shadow hover:from-green-500 hover:to-green-700 transition-all"
+            >
+                Home
+            </a>
+
+            <!-- Process Image Page Button -->
+            <a 
+                href="{% url 'process_image' %}" 
+                class="px-6 py-3 bg-gradient-to-r from-purple-400 to-purple-600 text-white font-semibold rounded-lg shadow hover:from-purple-500 hover:to-purple-700 transition-all"
+            >
+                Process Another Image
+            </a>
+        </div>
+    </div>
 </body>
 </html>

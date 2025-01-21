@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}View Results{% endblock %}
+
+{% block content %}
+<div class="space-y-4">
+    <h2 class="text-xl font-bold">Processed Images</h2>
+    <ul class="space-y-2">
+        {% for image in images %}
+        <li class="border p-4 rounded shadow">
+            <img src="{{ image.processed_image.url }}" alt="Processed Image" class="w-full h-auto">
+            <p class="text-gray-600">Uploaded by: {{ image.user }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'landing_page' %}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back to Home</a>
+</div>
+{% endblock %}

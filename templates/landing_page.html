@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Landing Page{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-screen space-y-8">
+    <!-- Heading -->
+    <h2 class="text-4xl font-extrabold text-gray-800 text-center">
+        Welcome to the Background Processing Project
+    </h2>
+    <p class="text-lg text-gray-600 text-center">
+        Choose an option below to get started:
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0">
+        <!-- Change Background Image Button -->
+        <a href="{% url 'change_background_image' %}" 
+            class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 transition-all text-center">
+            Change Background Image
+        </a>
+        
+        <!-- Change Background Video Button -->
+        <a href="{% url 'change_background_video' %}" 
+            class="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-green-700 transition-all text-center">
+            Change Background Video
+        </a>
+        
+        <!-- View Results Button -->
+    
+    </div>
+</div>
+{% endblock %}
