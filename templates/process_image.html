@@ -16,7 +16,7 @@
 
         <!-- Form Container -->
         <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
-            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form method="POST" enctype="multipart/form-data" class="space-y-6" id="processImageForm">
                 {% csrf_token %}
 
                 <!-- User Field -->
@@ -64,7 +64,7 @@
                                     class="hidden peer"
                                 >
                                 <img 
-                                    src="{{ MEDIA_URL }}./background_image/{{ choice.0 }}" 
+                                    src="{{ MEDIA_URL }}background_image/{{ choice.0 }}" 
                                     alt="Background Image" 
                                     class="w-full h-32 object-cover rounded-lg border-2 border-transparent shadow-md hover:shadow-lg transition-all peer-checked:border-blue-500"
                                 >
@@ -78,6 +78,7 @@
                     <button 
                         type="submit" 
                         class="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-md hover:from-purple-600 hover:to-pink-600 transition-all"
+                        id="submitButton"
                     >
                         Upload and Process
                     </button>
@@ -85,13 +86,39 @@
             </form>
         </div>
                
-    <!-- Back to Home Button -->
-    <div class="mt-6 text-center">
-        <a href="{% url 'landing_page' %}" 
-            class="inline-block px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-lg shadow-md hover:from-gray-600 hover:to-gray-700 transition-all">
-            Back to Home
-        </a>
+        <!-- Back to Home Button -->
+        <div class="mt-6 text-center">
+            <a href="{% url 'landing_page' %}" 
+                class="inline-block px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-lg shadow-md hover:from-gray-600 hover:to-gray-700 transition-all">
+                Back to Home
+            </a>
+        </div>
     </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="text-center text-white">
+            <div class="loader border-t-4 border-b-4 border-white rounded-full w-16 h-16 mb-4 animate-spin"></div>
+            <p class="text-xl font-bold">Please wait...</p>
+        </div>
     </div>
+
+    <script>
+        // Ensure the form and elements are properly selected
+        const form = document.getElementById('processImageForm');
+        const submitButton = document.getElementById('submitButton');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        if (form) {
+            form.addEventListener('submit', function () {
+                // Show the loading overlay
+                loadingOverlay.classList.remove('hidden');
+
+                // Disable the submit button to prevent multiple submissions
+                submitButton.disabled = true;
+                submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+        }
+    </script>
 </body>
 </html>

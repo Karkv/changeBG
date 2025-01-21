@@ -34,8 +34,17 @@
             </div>
         </div>
 
+
         <!-- Buttons Section -->
         <div class="mt-8 flex justify-center space-x-4">
+             <!-- Download Button -->
+             <a 
+             href="{{ image.processed_image.url }}" 
+             download="processed_image.jpg"
+             class="px-6 py-3 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-semibold rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transition-all"
+         >
+             Download Image
+         </a>
             <!-- Home Button -->
             <a 
                 href="{% url 'landing_page' %}" 
@@ -51,6 +60,8 @@
             >
                 Process Another Image
             </a>
+
+           
         </div>
     </div>
 </body>
